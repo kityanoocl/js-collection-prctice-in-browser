@@ -1,5 +1,17 @@
 'use strict';
 
 function createUpdatedCollection(collectionA, objectB) {
-  return 'Implement the practice require, and begin changing code in this row';
+  var size = collectionA.length;
+  var sizeB = objectB.value.length;
+
+  for (var i = 0; i < size; i++)
+  {
+      for (var j = 0; j < sizeB; j++)
+      {
+        if (collectionA[i].key == objectB.value[j])
+          collectionA[i].count -= Math.floor(collectionA[i].count / 3);
+      }
+  }
+
+  return collectionA;
 }
