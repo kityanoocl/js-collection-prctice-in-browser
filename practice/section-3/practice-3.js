@@ -1,37 +1,25 @@
 'use strict';
 
-function createUpdatedCollection(collectionA, objectB) {
-  var c = collectionA[0];
-  var co = 1;
-
-  var size = collectionA.length;
-  var ans = [];
-  for (var i = 1; i < size; i++)
-  {
-    if (c != collectionA[i])
-    {
-      ans.push({"key" : c, "count" : co});
-      c = collectionA[i];
-      co = 1;
-    }
+function arrayToObjectArray(collection) {
+  let objectArray = [];
+  objectArray = collection.reduce(function(allElements, element) {
+    let data = allElements.find(elementInAllElement => elementInAllElement.key == element);
+    if (data)
+      data.count++;
     else
-    {
-      co++;
-    }
-  }
-  ans.push({"key" : c, "count" : co});
+      allElements.push({"key" : element, "count" : 1});
+    return allElements;
+  }, [])
+  return objectArray;
+}
 
-  size = ans.length;
-  var sizeB = objectB.value.length;
+function createUpdatedCollection(collectionA, objectB) {
+   const arrOfObjectB = objectB.value;
+   const objectArrayOfCollectionA = arrayToObjectArray(collectionA);
 
-  for (var i = 0; i < size; i++)
-  {
-      for (var j = 0; j < sizeB; j++)
-      {
-        if (ans[i].key == objectB.value[j])
-          ans[i].count -= Math.floor(ans[i].count / 3);
-      }
-  }
-
-  return ans;
+   return objectArrayOfCollectionA.map(function(element) {
+         if (arrOfObjectB.includes(element.key))
+           element.count -= Math.floor(element.count / 3);
+         return element;
+       })
 }

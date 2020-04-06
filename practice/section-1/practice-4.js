@@ -1,17 +1,8 @@
 'use strict';
 
 function collectSameElements(collectionA, objectB) {
-  var size = collectionA.length;
-  var sizeB = objectB.value.length;
+  const arrOfCollectionA = collectionA.map(element => element.key);
+  const {value} = objectB;
 
-  var ans = [];
-  for (var i = 0; i < size; i++)
-  {
-      for (var j = 0; j < sizeB; j++)
-      {
-        if (collectionA[i].key == objectB.value[j])
-          ans.push(collectionA[i].key);
-      }
-  }
-  return ans;
+  return arrOfCollectionA.filter(element => value.includes(element));
 }

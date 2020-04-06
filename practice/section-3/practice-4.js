@@ -1,50 +1,27 @@
 'use strict';
 
+function arrayToObjectArray(collection) {
+  let objectArray = [];
+  objectArray = collection.reduce(function(allElements, element) {
+    let s = element.split('-');
+    let data = allElements.find(elementInAllElement => elementInAllElement.key == s[0]);
+    const addValue = (s[1])? s[1] : 1;
+    if (data)
+      data.count += addValue;
+    else
+      allElements.push({"key" : s[0], "count" : addValue});
+    return allElements;
+  }, [])
+  return objectArray;
+}
+
 function createUpdatedCollection(collectionA, objectB) {
-  var size = collectionA.length;
-  var ans = [];
-  var c;
-  var co = 0;
-  for (var i = 0; i < size; i++)
-  {
-    if (collectionA[i].indexOf('-') > 0) // special case
-    {
-      var s = collectionA[i].split('-');
-      if (c != null && s[0] != c)
-      {
-        ans.push({"key" : c, "count" : co});
-        co = 0;
-      }
-      co += parseInt(s[1]);
-      c = s[0];
-    }
-    else // normal case
-    {
-      if (c != null && c != collectionA[i])
-      {
-        ans.push({"key" : c, "count" : co});
-        co = 1
-      }
-      else
-      {
-        co++;
-      }
-      c = collectionA[i];
-    }
-  }
-  ans.push({"key" : c, "count" : co});
+   const arrOfObjectB = objectB.value;
+   const objectArrayOfCollectionA = arrayToObjectArray(collectionA);
 
-  size = ans.length;
-  var sizeB = objectB.value.length;
-
-  for (var i = 0; i < size; i++)
-  {
-      for (var j = 0; j < sizeB; j++)
-      {
-        if (ans[i].key == objectB.value[j])
-          ans[i].count -= Math.floor(ans[i].count / 3);
-      }
-  }
-
-  return ans;
+   return objectArrayOfCollectionA.map(function(element) {
+         if (arrOfObjectB.includes(element.key))
+           element.count -= Math.floor(element.count / 3);
+         return element;
+       })
 }
