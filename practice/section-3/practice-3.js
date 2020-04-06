@@ -2,7 +2,7 @@
 
 function arrayToObjectArray(collection) {
   let objectArray = [];
-  objectArray = collection.reduce(function(allElements, element) {
+  return collection.reduce(function(allElements, element) {
     let data = allElements.find(elementInAllElement => elementInAllElement.key == element);
     if (data)
       data.count++;
@@ -10,7 +10,6 @@ function arrayToObjectArray(collection) {
       allElements.push({"key" : element, "count" : 1});
     return allElements;
   }, [])
-  return objectArray;
 }
 
 function createUpdatedCollection(collectionA, objectB) {

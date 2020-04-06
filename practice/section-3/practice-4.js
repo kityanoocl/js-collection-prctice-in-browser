@@ -2,7 +2,7 @@
 
 function arrayToObjectArray(collection) {
   let objectArray = [];
-  objectArray = collection.reduce(function(allElements, element) {
+  return collection.reduce(function(allElements, element) {
     let splitStringWithKeyAndCount = element.split('-');
     let data = allElements.find(elementInAllElement => elementInAllElement.key == splitStringWithKeyAndCount[0]);
     const addValue = (splitStringWithKeyAndCount[1])? splitStringWithKeyAndCount[1] : 1;
@@ -12,7 +12,6 @@ function arrayToObjectArray(collection) {
       allElements.push({"key" : splitStringWithKeyAndCount[0], "count" : addValue});
     return allElements;
   }, [])
-  return objectArray;
 }
 
 function createUpdatedCollection(collectionA, objectB) {
