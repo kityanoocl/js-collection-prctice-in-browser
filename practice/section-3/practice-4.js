@@ -3,13 +3,13 @@
 function arrayToObjectArray(collection) {
   let objectArray = [];
   objectArray = collection.reduce(function(allElements, element) {
-    let s = element.split('-');
-    let data = allElements.find(elementInAllElement => elementInAllElement.key == s[0]);
-    const addValue = (s[1])? s[1] : 1;
+    let splitStringWithKeyAndCount = element.split('-');
+    let data = allElements.find(elementInAllElement => elementInAllElement.key == splitStringWithKeyAndCount[0]);
+    const addValue = (splitStringWithKeyAndCount[1])? splitStringWithKeyAndCount[1] : 1;
     if (data)
       data.count += addValue;
     else
-      allElements.push({"key" : s[0], "count" : addValue});
+      allElements.push({"key" : splitStringWithKeyAndCount[0], "count" : addValue});
     return allElements;
   }, [])
   return objectArray;
