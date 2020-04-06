@@ -1,7 +1,6 @@
 'use strict';
 
 function arrayToObjectArray(collection) {
-  let objectArray = [];
   return collection.reduce(function(allElements, element) {
     let splitStringWithKeyAndCount = element.split('-');
     let data = allElements.find(elementInAllElement => elementInAllElement.key == splitStringWithKeyAndCount[0]);

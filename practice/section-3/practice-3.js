@@ -1,7 +1,6 @@
 'use strict';
 
 function arrayToObjectArray(collection) {
-  let objectArray = [];
   return collection.reduce(function(allElements, element) {
     let data = allElements.find(elementInAllElement => elementInAllElement.key == element);
     if (data)
