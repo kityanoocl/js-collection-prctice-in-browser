@@ -2,7 +2,7 @@
 
 function collectSameElements(collectionA, objectB) {
   const arrOfCollectionA = collectionA.map(element => element.key);
-  const {value} = objectB;
+  const arrOfCollectionB = objectB.value;
 
-  return arrOfCollectionA.filter(element => value.includes(element));
+  return arrOfCollectionA.filter(element => arrOfCollectionB.includes(element));
 }
